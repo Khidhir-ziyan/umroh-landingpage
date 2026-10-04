@@ -8,8 +8,9 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%23b99245%22/><text x=%2250%22 y=%2266%22 text-anchor=%22middle%22 font-size=%2258%22 fill=%22white%22>✦</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
-  <style>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@1.52.0/dist/umd/lucide.min.js"></script>
+    <style>
     :root {
       --paper: #fbfaf7;
       --paper-deep: #f3efe7;
@@ -110,7 +111,8 @@
     .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
     .trust-item { padding: 27px 28px; border-right: 1px solid var(--line); display: flex; align-items: center; gap: 15px; }
     .trust-item:last-child { border-right: 0; }
-    .trust-icon { width: 38px; height: 38px; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center; color: var(--gold-deep); background: var(--gold-soft); font-family: var(--serif); }
+    .trust-icon { width: 38px; height: 38px; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center; color: var(--gold-deep); background: var(--gold-soft); }
+    .trust-icon svg { width: 18px; height: 18px; stroke-width: 1.8; }
     .trust-item strong { display: block; font-size: .86rem; }
     .trust-item span { display: block; margin-top: 2px; color: var(--muted); font-size: .75rem; }
 
@@ -143,6 +145,20 @@
     .checklist { display: grid; gap: 9px; margin-top: 20px; }
     .checklist span { font-size: .82rem; display: flex; align-items: center; gap: 8px; }
     .checklist span::before { content: "✓"; color: var(--gold); }
+    .mutawif-section { background: var(--green); color: #fff; }
+    .mutawif-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 76px; align-items: center; }
+    .mutawif-copy { max-width: 560px; }
+    .mutawif-copy .eyebrow { color: var(--gold-soft); }
+    .mutawif-copy h2 { margin: 18px 0 20px; }
+    .mutawif-copy > p { max-width: 520px; color: rgba(255,255,255,.7); }
+    .mutawif-points { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 28px 0 32px; }
+    .mutawif-point { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.83); font-size: .84rem; }
+    .mutawif-point svg { width: 18px; height: 18px; flex: 0 0 auto; color: var(--gold-soft); stroke-width: 1.8; }
+    .mutawif-card { padding: 34px; border: 1px solid rgba(234,220,187,.3); background: rgba(255,255,255,.07); }
+    .mutawif-card-icon { width: 48px; height: 48px; display: grid; place-items: center; margin-bottom: 25px; border-radius: 50%; color: var(--green); background: var(--gold-soft); }
+    .mutawif-card-icon svg { width: 23px; height: 23px; }
+    .mutawif-card h3 { margin-bottom: 12px; }
+    .mutawif-card p { margin-bottom: 0; color: rgba(255,255,255,.68); font-size: .9rem; }
 
     .pricing { position: relative; }
     .pricing::before { content: "PILIH DENGAN TENANG"; position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); padding: 8px 15px; background: var(--gold); color: #fff; font-size: .65rem; letter-spacing: .17em; font-weight: 700; white-space: nowrap; }
@@ -195,7 +211,7 @@
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
 
     @media (max-width: 900px) {
-      .hero-grid, .problem-grid, .author-grid { grid-template-columns: 1fr; gap: 55px; }
+      .hero-grid, .problem-grid, .author-grid, .mutawif-grid { grid-template-columns: 1fr; gap: 55px; }
       .hero { padding-top: 70px; }
       .hero-copy { order: 1; }
       .book-stage { order: 2; min-height: 430px; }
@@ -228,6 +244,8 @@
       .chapter p { grid-column: 2; }
       .chapter-num { font-size: 1.65rem; }
       .feature-card { min-height: 0; padding: 27px; }
+      .mutawif-points { grid-template-columns: 1fr; }
+      .mutawif-card { padding: 27px; }
       .price-card { padding: 30px 25px; }
       .price-card--featured { transform: none; order: -1; }
       .author-copy h2 { margin-top: 15px; }
@@ -285,9 +303,9 @@
 
     <section class="trust-strip" aria-label="Keunggulan ebook">
       <div class="container trust-grid">
-        <div class="trust-item"><span class="trust-icon">01</span><div><strong>13 bab berurutan</strong><span>Dari niat hingga pulang</span></div></div>
-        <div class="trust-item"><span class="trust-icon">✦</span><div><strong>Praktis dan terarah</strong><span>Checklist, budget, dan itinerary</span></div></div>
-        <div class="trust-item"><span class="trust-icon">↗</span><div><strong>Langsung dibimbing</strong><span>Chat WhatsApp untuk mulai</span></div></div>
+        <div class="trust-item"><span class="trust-icon"><i data-lucide="book-open-check" aria-hidden="true"></i></span><div><strong>13 bab panduan A-Z</strong><span>Dari dokumen hingga ibadah</span></div></div>
+        <div class="trust-item"><span class="trust-icon"><i data-lucide="wrench" aria-hidden="true"></i></span><div><strong>Solusi siap pakai</strong><span>Step-by-step dan 4 digital tools</span></div></div>
+        <div class="trust-item"><span class="trust-icon"><i data-lucide="heart-handshake" aria-hidden="true"></i></span><div><strong>Mutawif privat</strong><span>Pendampingan langsung di Tanah Suci</span></div></div>
       </div>
     </section>
 
@@ -311,9 +329,9 @@
       <div class="container">
         <div class="chapters-head">
           <div class="section-heading reveal">
-            <span class="eyebrow">Isi ebook</span>
-            <h2>Satu perjalanan.<br />Tiga belas bab.</h2>
-            <p>Dirancang seperti teman perjalanan: hadir sebelum berangkat, membantu saat di Tanah Suci, hingga memastikan Anda pulang dengan tenang.</p>
+            <span class="eyebrow">13 Bab Panduan A-Z</span>
+            <h2>Satu perjalanan.<br />Dari nol sampai pulang.</h2>
+            <p>Panduan praktis dan terstruktur untuk mengurus dokumen, menemukan tiket promo, booking hotel, hingga memahami tata cara ibadah yang sah.</p>
           </div>
           <p class="chapter-note reveal">Urutan bab mengikuti alur nyata perjalanan umroh mandiri — bukan sekadar kumpulan teori.</p>
         </div>
@@ -337,11 +355,33 @@
 
     <section class="section" id="bonus">
       <div class="container">
-        <div class="section-heading reveal"><span class="eyebrow">Lebih dari sekadar ebook</span><h2>Alat bantu yang membuat Anda bergerak.</h2><p>Karena panduan yang baik bukan hanya dibaca — tetapi dipakai, dicentang, dan dibawa dalam perjalanan.</p></div>
+        <div class="section-heading reveal"><span class="eyebrow">Lebih dari sekadar ebook</span><h2>Solusi nyata & siap pakai.</h2><p>Panduan step-by-step dan 4 digital tools yang membantu memangkas kebingungan Anda, dari masa persiapan hingga kepulangan.</p></div>
         <div class="feature-grid reveal">
-          <article class="feature-card feature-card--gold"><span class="feature-number">A</span><h3>Checklist yang bisa langsung dipakai</h3><p>Kurangi risiko lupa dengan daftar persiapan yang dibagi sesuai tahap perjalanan.</p><div class="checklist"><span>Dokumen & administrasi</span><span>Barang bawaan</span><span>Persiapan keluarga</span></div></article>
-          <article class="feature-card"><span class="feature-number">B</span><h3>Rencanakan biaya dengan lebih jernih</h3><p>Gunakan template anggaran untuk melihat komponen biaya utama sebelum menentukan pilihan.</p><div class="checklist"><span>Template budget perjalanan</span><span>Contoh itinerary</span><span>Daftar aplikasi & website</span></div></article>
+          <article class="feature-card feature-card--gold"><span class="feature-number">A</span><h3>Langkah yang bisa langsung diikuti</h3><p>Kurangi risiko lupa dengan checklist dan alur persiapan yang dibagi sesuai tahap perjalanan.</p><div class="checklist"><span>Checklist dokumen & administrasi</span><span>Checklist barang bawaan</span><span>Checklist persiapan keluarga</span></div></article>
+          <article class="feature-card"><span class="feature-number">B</span><h3>4 digital tools untuk merencanakan</h3><p>Gunakan alat bantu praktis untuk mengambil keputusan dengan lebih jernih sebelum berangkat.</p><div class="checklist"><span>Template budget perjalanan</span><span>Contoh itinerary</span><span>Daftar aplikasi & website</span><span>Kit kontak dan catatan penting</span></div></article>
         </div>
+      </div>
+    </section>
+
+    <section class="section mutawif-section" id="mutawif">
+      <div class="container mutawif-grid">
+        <div class="mutawif-copy reveal">
+          <span class="eyebrow">Layanan Mutawif Privat</span>
+          <h2>Lebih tenang karena ada yang mendampingi.</h2>
+          <p>Layanan pendampingan privat langsung di Tanah Suci untuk membimbing prosesi ibadah, penjemputan bandara, dan memastikan perjalanan keluarga Anda berjalan aman.</p>
+          <div class="mutawif-points">
+            <div class="mutawif-point"><i data-lucide="map-pin" aria-hidden="true"></i><span>Pendampingan langsung di Tanah Suci</span></div>
+            <div class="mutawif-point"><i data-lucide="book-open-check" aria-hidden="true"></i><span>Bimbingan prosesi ibadah</span></div>
+            <div class="mutawif-point"><i data-lucide="plane-landing" aria-hidden="true"></i><span>Penjemputan bandara</span></div>
+            <div class="mutawif-point"><i data-lucide="shield-check" aria-hidden="true"></i><span>Perjalanan keluarga lebih aman</span></div>
+          </div>
+          <a class="btn btn--gold" href="https://wa.me/6287777995846?text=Assalamu%E2%80%99alaikum%2C%20saya%20tertarik%20dengan%20Layanan%20Mutawif%20Privat.%20Mohon%20info%20pendampingan%20di%20Tanah%20Suci." target="_blank" rel="noopener">Tanya layanan mutawif ↗</a>
+        </div>
+        <aside class="mutawif-card reveal">
+          <div class="mutawif-card-icon"><i data-lucide="heart-handshake" aria-hidden="true"></i></div>
+          <h3>Pendampingan yang terasa personal.</h3>
+          <p>Untuk Anda yang ingin fokus beribadah tanpa sendirian menghadapi detail perjalanan bersama keluarga.</p>
+        </aside>
       </div>
     </section>
 
@@ -419,6 +459,7 @@
       }, { threshold: .12 });
       reveals.forEach(el => observer.observe(el));
     } else { reveals.forEach(el => el.classList.add('is-visible')); }
+    if (window.lucide) { lucide.createIcons(); }
     document.querySelector('#year').textContent = new Date().getFullYear();
   </script>
 </body>
