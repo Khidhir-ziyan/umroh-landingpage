@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #fbfaf7; color: #1e211e; font-family: 'DM Sans', Arial, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+:focus-visible { outline: 3px solid #b99245; outline-offset: 4px; }
+.serif { font-family: 'Playfair Display', Georgia, serif; }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+.hero-ring { box-shadow: 0 0 0 40px rgba(234,220,187,.17), 0 0 0 90px rgba(234,220,187,.12); }
+.closing-ring { box-shadow: 0 0 0 50px rgba(234,220,187,.06), 0 0 0 100px rgba(234,220,187,.04); }
+.book-page { box-shadow: 19px 23px 0 #9c7a39, 23px 28px 36px rgba(51,38,15,.27); }
+.book-page::before { content: ''; position: absolute; inset: 20px; border: 1px solid rgba(143,107,46,.48); pointer-events: none; }
+.book-page::after { content: ''; position: absolute; top: 0; left: 22px; width: 4px; height: 100%; background: rgba(111,76,24,.24); box-shadow: 5px 0 rgba(255,255,255,.17); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding-bottom .3s ease; }
+.faq-item.is-open .faq-answer { max-height: 200px; padding-bottom: 23px; }
+.faq-item.is-open .faq-plus { transform: rotate(45deg); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
