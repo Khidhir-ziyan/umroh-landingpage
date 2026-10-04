@@ -57,8 +57,8 @@
       border-bottom: 1px solid rgba(222,216,204,.82);
     }
     .nav { height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-    .brand { display: flex; align-items: center; gap: 11px; font-family: var(--serif); font-weight: 600; font-size: 1.05rem; }
-    .brand-mark { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--gold); color: var(--gold-deep); border-radius: 50%; font-size: .76rem; }
+    .brand { display: flex; align-items: center; }
+    .brand img { width: 154px; height: 46px; object-fit: contain; object-position: left center; }
     .nav-links { display: flex; gap: 25px; align-items: center; color: var(--muted); font-size: .86rem; }
     .nav-links a:hover { color: var(--ink); }
     .nav-cta { padding: 10px 17px; border: 1px solid var(--gold); color: var(--gold-deep); border-radius: 999px; font-weight: 700; font-size: .8rem; }
@@ -83,14 +83,10 @@
 
     .book-stage { position: relative; min-height: 480px; display: grid; place-items: center; }
     .book-shadow { position: absolute; width: 310px; height: 45px; bottom: 35px; border-radius: 50%; background: rgba(44,35,20,.18); filter: blur(20px); }
-    .book { position: relative; width: 295px; height: 410px; transform: rotate(5deg); border-radius: 5px 14px 14px 5px; padding: 38px 30px; background: linear-gradient(145deg, #f8f1df, #d9bf80); box-shadow: 19px 23px 0 #9c7a39, 23px 28px 36px rgba(51,38,15,.27); color: var(--green); overflow: hidden; }
-    .book::before { content: ""; position: absolute; inset: 20px; border: 1px solid rgba(143,107,46,.48); pointer-events: none; }
-    .book::after { content: ""; position: absolute; top: 0; left: 22px; width: 4px; height: 100%; background: rgba(111,76,24,.24); box-shadow: 5px 0 rgba(255,255,255,.17); }
-    .book-kicker { position: relative; z-index: 1; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); }
-    .book h3 { position: relative; z-index: 1; margin: 64px 0 17px; font-size: 2.36rem; line-height: 1.02; }
-    .book p { position: relative; z-index: 1; max-width: 160px; font-size: .82rem; line-height: 1.5; color: #4c5d51; }
-    .book-stamp { position: absolute; right: 25px; bottom: 31px; width: 76px; height: 76px; display: grid; place-items: center; border: 1px solid var(--gold-deep); border-radius: 50%; color: var(--gold-deep); font-size: .56rem; text-align: center; letter-spacing: .08em; line-height: 1.15; transform: rotate(-14deg); }
-    .book-stamp strong { font-family: var(--serif); font-size: 1.2rem; display: block; letter-spacing: 0; }
+    .cover-frame { position: relative; z-index: 1; width: 295px; aspect-ratio: 4 / 5; transform: rotate(4deg); border-radius: 8px 16px 16px 8px; overflow: hidden; background: var(--gold-soft); box-shadow: 18px 22px 0 #9c7a39, 22px 28px 36px rgba(51,38,15,.27); animation: cover-arrive .85s cubic-bezier(.2,.8,.2,1) both; }
+    .cover-frame::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.35); border-radius: inherit; pointer-events: none; }
+    .cover-frame img { width: 100%; height: 100%; object-fit: cover; }
+    @keyframes cover-arrive { from { opacity: 0; transform: translateY(22px) rotate(8deg) scale(.96); } to { opacity: 1; transform: translateY(0) rotate(4deg) scale(1); } }
     .passport-card { position: absolute; right: 0; top: 34px; width: 185px; padding: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.78); box-shadow: 0 14px 32px rgba(49,39,21,.1); transform: rotate(-7deg); }
     .passport-top { display: flex; justify-content: space-between; color: var(--gold-deep); font-size: .61rem; letter-spacing: .1em; text-transform: uppercase; }
     .route { margin: 20px 0 12px; display: flex; align-items: center; gap: 8px; font-family: var(--serif); color: var(--green); }
@@ -183,11 +179,12 @@
 
     footer { padding: 25px 0; background: #1c332d; color: rgba(255,255,255,.5); font-size: .74rem; }
     .footer-row { display: flex; justify-content: space-between; gap: 20px; }
-    .footer-brand { color: rgba(255,255,255,.85); font-family: var(--serif); }
+    .footer-brand { display: inline-flex; align-items: center; color: rgba(255,255,255,.85); }
+    .footer-brand img { width: 154px; height: 42px; object-fit: contain; object-position: left center; }
 
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.is-visible { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } .reveal, .cover-frame { opacity: 1; transform: none; animation: none; } }
 
     @media (max-width: 900px) {
       .hero-grid, .problem-grid, .author-grid { grid-template-columns: 1fr; gap: 55px; }
@@ -212,9 +209,10 @@
       .hero { min-height: 0; padding: 64px 0 70px; }
       h1 { font-size: clamp(2.85rem, 14vw, 5rem); }
       .hero-copy > p { font-size: 1rem; }
-      .book { width: 255px; height: 355px; padding: 29px 25px; }
-      .book h3 { margin-top: 52px; font-size: 2rem; }
+      .cover-frame { width: 255px; }
       .passport-card { right: -6px; top: 18px; transform: scale(.84) rotate(-7deg); transform-origin: top right; }
+      .brand img { width: 132px; height: 42px; }
+      .footer-brand img { width: 140px; }
       .trust-grid, .pricing-grid, .feature-grid { grid-template-columns: 1fr; }
       .trust-item { border-right: 0; border-bottom: 1px solid var(--line); padding: 19px 0; }
       .trust-item:last-child { border-bottom: 0; }
