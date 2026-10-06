@@ -212,7 +212,7 @@
       .hero-copy > p { font-size: 1rem; }
       .cover-frame { width: 255px; }
       .passport-card { right: -6px; top: 18px; transform: scale(.84) rotate(-7deg); transform-origin: top right; }
-      .brand img { width: 132px; height: 42px; }
+      .brand img { width: auto; height: 46px; }
       .footer-brand img { width: 140px; }
       .trust-grid, .pricing-grid, .feature-grid { grid-template-columns: 1fr; }
       .trust-item { border-right: 0; border-bottom: 1px solid var(--line); padding: 19px 0; }
