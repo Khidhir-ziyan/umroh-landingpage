@@ -235,3 +235,13 @@
   #masalah .section-heading p { margin-bottom: 0; }
   #masalah .problem-grid { gap: 22px; }
 }
+.pain-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pain-card { min-height: 0; padding: 16px; border-radius: 12px; }
+.pain-card b { margin-bottom: 8px; font-size: 1.1rem; }
+.pain-card h3 { margin: 0 0 6px; font-size: .95rem; line-height: 1.3; color: var(--ink); }
+.pain-card p { font-size: .8rem; line-height: 1.5; }
+.pain-cta { grid-column: 1 / -1; margin-top: 8px; border-radius: 18px; text-align: center; line-height: 1.45; }
+
+@media (max-width: 360px) {
+  .pain-list { grid-template-columns: 1fr; }
+}
