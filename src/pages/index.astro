@@ -202,5 +202,61 @@ const canonical = "https://umrohsendiri.biz.id/";
     } else { reveals.forEach(el => el.classList.add('is-visible')); }
     document.querySelector('#year').textContent = new Date().getFullYear();
   </script>
+  <script>
+    const chapBox = document.querySelector('#chap-carousel');
+    const chapTrack = document.querySelector('#chap-track');
+    if (chapBox && chapTrack) {
+      const cards = chapTrack.querySelectorAll('.chap-card');
+      const prev = document.querySelector('#chap-prev');
+      const next = document.querySelector('#chap-next');
+      const count = document.querySelector('#chap-count');
+      const bar = document.querySelector('#chap-bar');
+      const pad = (n) => String(n).padStart(2, '0');
+      const step = () => (cards[1] ? cards[1].offsetLeft - cards[0].offsetLeft : chapTrack.clientWidth);
+      const maxScroll = () => chapTrack.scrollWidth - chapTrack.clientWidth;
+      const current = () => Math.round(chapTrack.scrollLeft / step());
+      const goTo = (i) => chapTrack.scrollTo({ left: i * step(), behavior: 'smooth' });
+      const atEnd = () => chapTrack.scrollLeft >= maxScroll() - 4;
+
+      const update = () => {
+        const first = Math.min(current(), cards.length - 1);
+        const visible = Math.max(1, Math.floor((chapTrack.clientWidth + 16) / step() + 0.05));
+        const last = Math.min(first + visible, cards.length);
+        count.textContent = 'Bab ' + pad(first + 1) + (last > first + 1 ? '–' + pad(last) : '') + ' dari ' + cards.length;
+        bar.style.width = (maxScroll() > 0 ? (chapTrack.scrollLeft / maxScroll()) * 100 : 100) + '%';
+      };
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let timer = null;
+      let hold = false;
+      const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+      const advance = () => {
+        if (hold || document.hidden) return;
+        if (atEnd()) chapTrack.scrollTo({ left: 0, behavior: 'smooth' });
+        else goTo(Math.min(current() + 1, cards.length - 1));
+      };
+      const start = () => { stop(); if (!reduce.matches) timer = setInterval(advance, 5000); };
+      const pause = () => { hold = true; };
+      const resume = () => { hold = false; start(); };
+
+      prev.addEventListener('click', () => { goTo(Math.max(current() - 1, 0)); start(); });
+      next.addEventListener('click', () => {
+        if (atEnd()) chapTrack.scrollTo({ left: 0, behavior: 'smooth' });
+        else goTo(Math.min(current() + 1, cards.length - 1));
+        start();
+      });
+      chapTrack.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      chapBox.addEventListener('mouseenter', pause);
+      chapBox.addEventListener('mouseleave', resume);
+      chapBox.addEventListener('touchstart', pause, { passive: true });
+      chapBox.addEventListener('touchend', resume);
+      chapBox.addEventListener('touchcancel', resume);
+      chapBox.addEventListener('focusin', pause);
+      chapBox.addEventListener('focusout', resume);
+      update();
+      start();
+    }
+  </script>
   </body>
 </html>
