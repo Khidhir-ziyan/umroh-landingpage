@@ -230,3 +230,8 @@
       .closing { padding: 78px 0; }
       .footer-row { flex-direction: column; }
     }
+@media (max-width: 900px) {
+  #masalah .section-heading { margin-bottom: 0; }
+  #masalah .section-heading p { margin-bottom: 0; }
+  #masalah .problem-grid { gap: 22px; }
+}
