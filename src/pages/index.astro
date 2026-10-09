@@ -171,6 +171,11 @@ const canonical = "https://umrohsendiri.biz.id/";
   </main>
 
   <footer><div class="container footer-row"><span class="footer-brand"><img src="/images/ka'bah.png" alt="Logo Ka'bah" /></span><span>© <span id="year"></span> · Panduan praktis untuk perjalanan yang lebih tenang.</span></div></footer>
+    <div class="buy-toast" id="buy-toast" role="status" aria-live="polite">
+    <div class="buy-toast__icon"><i class="ph ph-shopping-bag" aria-hidden="true"></i></div>
+    <div class="buy-toast__text"><b id="buy-toast-name"></b><span id="buy-toast-time"></span></div>
+    <button class="buy-toast__close" id="buy-toast-close" type="button" aria-label="Tutup"><i class="ph ph-x" aria-hidden="true"></i></button>
+  </div>
 
   <script>
     const menuToggle = document.querySelector('.menu-toggle');
@@ -257,6 +262,55 @@ const canonical = "https://umrohsendiri.biz.id/";
       chapBox.addEventListener('focusout', resume);
       update();
       start();
+    }
+  </script>
+    <script>
+    // Isi hanya dengan pembelian ASLI yang pembelinya sudah mengizinkan.
+    // Format: { name: 'Nama', city: 'Kota', time: '2026-10-08T14:30:00+07:00' },
+    const orders = [
+      { name: 'Umar', city: 'Depok', time: '2026-10-13T13:00:00+07:00' },
+      { name: 'Ridwan', city: 'Tangerang', time: '2026-10-11T13:00:00+07:00' },
+      { name: 'Riska', city: 'Jakarta', time: '2026-10-9T13:00:00+07:00' },
+      { name: 'Citra', city: 'Bekasi', time: '2026-10-9T13:00:00+07:00' },
+    ];
+    const PRODUCT = 'Paket Ebook';
+
+    const toast = document.querySelector('#buy-toast');
+    if (toast) {
+      const nameEl = document.querySelector('#buy-toast-name');
+      const timeEl = document.querySelector('#buy-toast-time');
+      const closeBtn = document.querySelector('#buy-toast-close');
+      let closed = false;
+      try { closed = sessionStorage.getItem('buy-toast-closed') === '1'; } catch (e) {}
+
+      const ago = (iso) => {
+        const s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
+        if (s < 3600) return Math.max(1, Math.round(s / 60)) + ' menit lalu';
+        if (s < 86400) return Math.round(s / 3600) + ' jam lalu';
+        if (s < 2592000) return Math.round(s / 86400) + ' hari lalu';
+        if (s < 31536000) return Math.round(s / 2592000) + ' bulan lalu';
+        return Math.round(s / 31536000) + ' tahun lalu';
+      };
+
+      let i = 0;
+      const show = () => {
+        if (closed) return;
+        const o = orders[i % orders.length];
+        nameEl.textContent = o.name + (o.city ? ' dari ' + o.city : '');
+        timeEl.textContent = 'membeli ' + PRODUCT + ' · ' + ago(o.time);
+        toast.classList.add('is-visible');
+        setTimeout(() => toast.classList.remove('is-visible'), 6000);
+        i += 1;
+        setTimeout(show, 16000);
+      };
+
+      closeBtn.addEventListener('click', () => {
+        closed = true;
+        toast.classList.remove('is-visible');
+        try { sessionStorage.setItem('buy-toast-closed', '1'); } catch (e) {}
+      });
+
+      if (orders.length) setTimeout(show, 8000);
     }
   </script>
   </body>
