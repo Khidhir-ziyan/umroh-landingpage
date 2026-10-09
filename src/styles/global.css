@@ -268,3 +268,8 @@
   .chap-carousel { margin-top: 36px; }
   .chap-card { flex-basis: 84%; min-height: 230px; padding: 22px; }
 }
+.hero-copy h1 { font-size: clamp(2.2rem, 4.6vw, 4.2rem); }
+
+@media (max-width: 700px) {
+  .hero-copy h1 { font-size: clamp(2rem, 9vw, 3rem); }
+}
