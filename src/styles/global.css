@@ -386,3 +386,33 @@
 @media (max-width: 700px) {
   .cover-frame { width: 270px; }
 }
+/* === Garis rute Jakarta - Jeddah dan label info === */
+.book-stage { isolation: isolate; }
+.route-art { position: absolute; left: 0; right: 0; top: 0; width: 100%; height: auto; z-index: 0; pointer-events: none; overflow: visible; }
+.route-line { fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 2 9; opacity: .85; animation: route-dash 2.4s linear infinite; }
+.route-dot { fill: var(--gold-deep); }
+.route-ring { fill: none; stroke: var(--gold); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: route-pulse 2.6s ease-out infinite; }
+.route-label { font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: .14em; fill: var(--gold-deep); }
+.route-plane { fill: var(--gold-deep); }
+@keyframes route-dash { to { stroke-dashoffset: -22; } }
+@keyframes route-pulse { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(2.6); opacity: 0; } }
+
+.info-chip { position: absolute; z-index: 3; display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 999px; background: rgba(255,255,255,.94); border: 1px solid var(--line); box-shadow: 0 10px 24px rgba(49,39,21,.12); color: var(--ink); font-size: .74rem; font-weight: 600; white-space: nowrap; animation: chip-float 6s ease-in-out infinite; }
+.info-chip i { color: var(--gold-deep); font-size: 1.05rem; }
+.info-chip--1 { left: -4%; top: 30%; }
+.info-chip--2 { right: -2%; top: 52%; animation-delay: -2s; }
+.info-chip--3 { left: 2%; bottom: 8%; animation-delay: -4s; }
+@keyframes chip-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+@media (max-width: 700px) {
+  .info-chip { font-size: .66rem; padding: 6px 10px; }
+  .info-chip--1 { left: 0; top: 24%; }
+  .info-chip--2 { right: 0; top: 46%; }
+  .info-chip--3 { left: 4%; bottom: 6%; }
+  .route-label { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-line, .route-ring, .info-chip { animation: none; }
+  .route-plane { display: none; }
+}
