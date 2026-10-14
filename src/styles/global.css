@@ -300,3 +300,4 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-copy h1 em { animation: none !important; }
 }
+.brand-text { text-transform: uppercase; letter-spacing: .06em; }
