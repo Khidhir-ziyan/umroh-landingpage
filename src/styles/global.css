@@ -359,3 +359,30 @@
   background: #0e766a;
   box-shadow: 0 16px 30px rgba(18, 140, 126, .4);
 }
+/* Sampul ebook transparan: tanpa kartu putih dan tanpa blok emas */
+.cover-frame {
+  width: 340px;
+  aspect-ratio: auto;
+  transform: none;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+  animation: cover-fade .85s ease both;
+}
+.cover-frame::after { display: none; }
+.cover-frame img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 28px rgba(51, 38, 15, .22));
+}
+.book-shadow { display: none; }
+@keyframes cover-fade {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 700px) {
+  .cover-frame { width: 270px; }
+}
