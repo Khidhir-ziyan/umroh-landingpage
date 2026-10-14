@@ -350,3 +350,12 @@
 @media (max-width: 700px) {
   .hero::before { width: calc(92vw + 12px); height: calc(62% + 12px); opacity: .3; }
 }
+.hero-copy .btn--gold {
+  background: #128C7E;
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(18, 140, 126, .3);
+}
+.hero-copy .btn--gold:hover {
+  background: #0e766a;
+  box-shadow: 0 16px 30px rgba(18, 140, 126, .4);
+}
