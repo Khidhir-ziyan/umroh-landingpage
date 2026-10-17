@@ -434,3 +434,39 @@
   .hero-stats { gap: 12px 26px; margin-top: 24px; padding-top: 18px; }
   .hero-stat b { font-size: 1.55rem; }
 }
+/* === Cuplikan ebook (flipbook) === */
+.flipbook-stage { max-width: 1000px; margin: 0 auto; }
+.flipbook-book { position: relative; aspect-ratio: 2 / 1.415; box-shadow: 0 28px 44px rgba(49, 39, 21, .22); border-radius: 4px; }
+.fb-base, .fb-leaf { position: absolute; top: 0; width: 50%; height: 100%; }
+.fb-base--left { left: 0; }
+.fb-base--right { left: 50%; }
+.fb-base { background: #fff; overflow: hidden; }
+.fb-leaf { left: 50%; z-index: 3; cursor: pointer; transform-origin: left center; transform-style: preserve-3d; transform: perspective(2400px) rotateY(0deg); transition: transform 1s cubic-bezier(.65, .05, .25, 1); }
+.fb-leaf.is-flipped { transform: perspective(2400px) rotateY(-180deg); }
+.fb-face { position: absolute; inset: 0; overflow: hidden; background: #fff; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.fb-face--back { transform: rotateY(180deg); }
+.fb-base img, .fb-face img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.fb-base--left, .fb-face--back { border-radius: 4px 0 0 4px; }
+.fb-base--right, .fb-face--front { border-radius: 0 4px 4px 0; }
+.fb-base--left::after, .fb-face--back::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, transparent 86%, rgba(40, 30, 10, .24)); }
+.fb-base--right::after, .fb-face--front::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(270deg, transparent 86%, rgba(40, 30, 10, .24)); }
+
+.flipbook-controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 28px; }
+.fb-btn { width: 46px; height: 46px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 50%; background: var(--white, #fff); color: var(--ink); font-size: 1.1rem; cursor: pointer; transition: border-color .2s ease, color .2s ease; }
+.fb-btn:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-deep); }
+.fb-btn:disabled { opacity: .35; cursor: default; }
+.fb-label { min-width: 130px; text-align: center; font-size: .9rem; color: var(--muted); }
+.flipbook-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 30px; }
+.pages-scroll, .pages-hint { display: none; }
+
+@media (max-width: 700px) {
+  .flipbook { display: none; }
+  .pages-scroll { display: flex; gap: 14px; margin: 0 -20px; padding: 6px 20px 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .pages-scroll::-webkit-scrollbar { display: none; }
+  .pages-scroll img { flex: 0 0 84%; width: 84%; height: auto; scroll-snap-align: center; border-radius: 6px; background: #fff; box-shadow: 0 14px 28px rgba(49, 39, 21, .2); }
+  .pages-hint { display: block; margin: 4px 0 0; text-align: center; font-size: .82rem; color: var(--muted); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fb-leaf { transition: none; }
+}
