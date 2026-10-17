@@ -425,3 +425,12 @@
 }
 .buy-toast__icon--img { width: 44px; height: 44px; border-radius: 0; background: transparent; }
 .buy-toast__icon--img img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* === Baris angka di hero === */
+.hero-stats { display: flex; flex-wrap: wrap; gap: 14px 36px; max-width: 520px; margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--line); }
+.hero-stat b { display: block; font-family: var(--serif); font-size: 1.9rem; font-weight: 600; line-height: 1.1; color: var(--gold-deep); }
+.hero-stat span { display: block; margin-top: 4px; font-size: .78rem; color: var(--muted); }
+
+@media (max-width: 700px) {
+  .hero-stats { gap: 12px 26px; margin-top: 24px; padding-top: 18px; }
+  .hero-stat b { font-size: 1.55rem; }
+}
