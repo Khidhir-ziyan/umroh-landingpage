@@ -423,3 +423,5 @@
 @media (max-width: 700px) {
   .trust-icon--img { width: 54px; height: 54px; }
 }
+.buy-toast__icon--img { width: 44px; height: 44px; border-radius: 0; background: transparent; }
+.buy-toast__icon--img img { display: block; width: 100%; height: 100%; object-fit: contain; }
