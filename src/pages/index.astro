@@ -136,7 +136,46 @@ const canonical = "https://umrohsendiri.biz.id/";
         </div>
       </div>
     </section>
+    <section class="section" id="cuplikan">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Intip isinya</span>
+          <h2>Baca cuplikannya dulu sebelum memutuskan</h2>
+          <p class="intro">Beberapa halaman dari ebook Kunci Umroh Mandiri. Klik panah atau halamannya untuk membalik.</p>
+        </div>
 
+        <div class="flipbook reveal" id="flipbook" aria-label="Cuplikan ebook, halaman dapat dibalik">
+          <div class="flipbook-stage">
+            <div class="flipbook-book">
+              <div class="fb-base fb-base--left"><img src="/images/cuplikan/halaman-1.webp" width="1000" height="1414" loading="lazy" decoding="async" alt="Cuplikan halaman 1: umroh mandiri, panggilan yang bisa kamu jawab sendiri" /></div>
+              <div class="fb-base fb-base--right"><img src="/images/cuplikan/halaman-4.webp" width="1000" height="1414" loading="lazy" decoding="async" alt="Cuplikan halaman 4: rukun umroh" /></div>
+              <div class="fb-leaf" id="fb-leaf">
+                <div class="fb-face fb-face--front"><img src="/images/cuplikan/halaman-2.webp" width="1000" height="1414" loading="lazy" decoding="async" alt="Cuplikan halaman 2: waktu terbaik untuk umroh mandiri" /></div>
+                <div class="fb-face fb-face--back"><img src="/images/cuplikan/halaman-3.webp" width="1000" height="1414" loading="lazy" decoding="async" alt="Cuplikan halaman 3: syarat dan rukun ibadah umroh" /></div>
+              </div>
+            </div>
+          </div>
+          <div class="flipbook-controls">
+            <button class="fb-btn" id="fb-prev" type="button" aria-label="Halaman sebelumnya"><i class="ph ph-arrow-left" aria-hidden="true"></i></button>
+            <span class="fb-label" id="fb-label">Halaman 1 – 2</span>
+            <button class="fb-btn" id="fb-next" type="button" aria-label="Halaman berikutnya"><i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+          </div>
+        </div>
+
+        <div class="pages-scroll" aria-label="Cuplikan ebook, geser ke samping">
+          <img src="/images/cuplikan/halaman-1.webp" width="1000" height="1414" loading="lazy" decoding="async" alt="Cuplikan halaman 1" />
+          <img src="/images/cuplikan/halaman-2.webp" width="1000" height="1414" loading="lazy" decoding="async" alt="Cuplikan halaman 2" />
+          <img src="/images/cuplikan/halaman-3.webp" width="1000" height="1414" loading="lazy" decoding="async" alt="Cuplikan halaman 3" />
+          <img src="/images/cuplikan/halaman-4.webp" width="1000" height="1414" loading="lazy" decoding="async" alt="Cuplikan halaman 4" />
+        </div>
+        <p class="pages-hint">Geser ke samping untuk membaca</p>
+
+        <div class="flipbook-cta">
+          <a class="btn btn--outline" href="/cuplikan-umroh-mandiri.pdf" target="_blank" rel="noopener">Unduh cuplikan (PDF)</a>
+          <a class="btn btn--gold" href="#paket">Lihat paket <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </section>
     <section class="section" id="bonus">
       <div class="container">
         <div class="section-heading reveal"><span class="eyebrow">Ebook + digital toolkit</span><h2>Siap merencanakan dengan lebih tenang.</h2><p>Semua alat bantu yang Anda perlukan untuk mengubah riset menjadi langkah yang jelas dan siap dieksekusi.</p></div>
@@ -331,6 +370,35 @@ const canonical = "https://umrohsendiri.biz.id/";
       });
 
       if (orders.length) setTimeout(show, 8000);
+    }
+  </script>
+  <script>
+    const fbLeaf = document.querySelector('#fb-leaf');
+    if (fbLeaf) {
+      const fbPrev = document.querySelector('#fb-prev');
+      const fbNext = document.querySelector('#fb-next');
+      const fbLabel = document.querySelector('#fb-label');
+      const fbStage = document.querySelector('.flipbook-stage');
+      const setFlip = (flipped) => {
+        fbLeaf.classList.toggle('is-flipped', flipped);
+        fbLabel.textContent = flipped ? 'Halaman 3 – 4' : 'Halaman 1 – 2';
+        fbPrev.disabled = !flipped;
+        fbNext.disabled = flipped;
+      };
+      fbPrev.addEventListener('click', () => setFlip(false));
+      fbNext.addEventListener('click', () => setFlip(true));
+      fbLeaf.querySelector('.fb-face--front').addEventListener('click', () => setFlip(true));
+      fbLeaf.querySelector('.fb-face--back').addEventListener('click', () => setFlip(false));
+      let startX = null;
+      fbStage.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+      fbStage.addEventListener('pointerup', (e) => {
+        if (startX === null) return;
+        const dx = e.clientX - startX;
+        startX = null;
+        if (dx < -40) setFlip(true);
+        else if (dx > 40) setFlip(false);
+      });
+      setFlip(false);
     }
   </script>
   </body>
