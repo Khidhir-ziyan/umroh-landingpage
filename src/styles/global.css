@@ -435,7 +435,7 @@
   .hero-stat b { font-size: 1.55rem; }
 }
 /* === Cuplikan ebook (flipbook) === */
-.flipbook-stage { max-width: 1000px; margin: 0 auto; }
+.flipbook-stage { max-width: 720px; margin: 0 auto; }
 .flipbook-book { position: relative; aspect-ratio: 2 / 1.415; box-shadow: 0 28px 44px rgba(49, 39, 21, .22); border-radius: 4px; }
 .fb-base, .fb-leaf { position: absolute; top: 0; width: 50%; height: 100%; }
 .fb-base--left { left: 0; }
