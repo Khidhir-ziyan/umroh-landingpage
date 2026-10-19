@@ -470,3 +470,22 @@
 @media (prefers-reduced-motion: reduce) {
   .fb-leaf { transition: none; }
 }
+/* === Teks berjalan 13 bab di paling atas === */
+.topbar { position: relative; z-index: 21; overflow: hidden; background: var(--green); color: #f4ecd4; border-bottom: 1px solid rgba(185, 146, 69, .35); }
+.topbar-track { display: flex; width: max-content; animation: topbar-run 70s linear infinite; }
+.topbar-group { display: flex; align-items: center; flex: none; }
+.topbar-item { padding: 0 22px; font-size: .78rem; font-weight: 600; line-height: 36px; white-space: nowrap; }
+.topbar-item b { margin-right: 7px; color: var(--gold); font-weight: 700; letter-spacing: .04em; }
+.topbar-dot { color: var(--gold); font-size: .55rem; line-height: 36px; }
+.topbar:hover .topbar-track { animation-play-state: paused; }
+@keyframes topbar-run { to { transform: translateX(-50%); } }
+
+@media (max-width: 700px) {
+  .topbar-item { padding: 0 16px; font-size: .72rem; line-height: 32px; }
+  .topbar-dot { line-height: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar-track { animation: none; }
+  .topbar { overflow-x: auto; }
+}
