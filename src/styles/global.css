@@ -245,7 +245,7 @@
     .faq-list { max-width: 780px; border-top: 1px solid var(--line); }
     .faq-item { border-bottom: 1px solid var(--line); }
     .faq-question { width: 100%; display: flex; justify-content: space-between; gap: 24px; padding: 24px 0; text-align: left; border: 0; background: transparent; color: var(--ink); font-family: var(--serif); font-size: 1.23rem; cursor: pointer; }
-    .faq-question span:last-child { color: var(--gold); font-family: var(--sans); transition: transform .2s ease; }
+    .faq-question span:last-child { flex: none; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-family: var(--sans); transition: transform .2s ease; }
     .faq-answer { max-width: 690px; max-height: 0; overflow: hidden; color: var(--muted); font-size: .9rem; transition: max-height .3s ease, padding-bottom .3s ease; }
     .faq-item.is-open .faq-answer { max-height: 200px; padding-bottom: 23px; }
     .faq-item.is-open .faq-question span:last-child { transform: rotate(45deg); }
@@ -439,6 +439,164 @@
   background: #0e766a;
   box-shadow: 0 16px 30px rgba(18, 140, 126, .4);
 }
+/* Tombol primer hero: Shiny CTA (gradient berputar + dots + shimmer), warna brand hijau */
+@property --shiny-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@property --shiny-angle-offset {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@property --shiny-percent {
+  syntax: "<percentage>";
+  initial-value: 5%;
+  inherits: false;
+}
+@property --shiny-shine {
+  syntax: "<color>";
+  initial-value: #d4af5a;
+  inherits: false;
+}
+.shiny-cta {
+  --shiny-bg: #128C7E;
+  --shiny-bg-subtle: #0e766a;
+  --shiny-fg: #ffffff;
+  --shiny-highlight: #d4af5a;
+  --shiny-highlight-subtle: #eadcbb;
+  --shiny-animation: shiny-angle linear infinite;
+  --shiny-duration: 3s;
+  --shiny-shadow-size: 2px;
+  --shiny-transition: 800ms cubic-bezier(0.25, 1, 0.5, 1);
+
+  isolation: isolate;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline-offset: 4px;
+  padding: 16px 30px;
+  font-family: var(--sans);
+  font-size: .9rem;
+  line-height: 1.2;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 360px;
+  color: var(--shiny-fg);
+  background: linear-gradient(var(--shiny-bg), var(--shiny-bg)) padding-box,
+    conic-gradient(
+      from calc(var(--shiny-angle) - var(--shiny-angle-offset)),
+      transparent,
+      var(--shiny-highlight) var(--shiny-percent),
+      var(--shiny-shine) calc(var(--shiny-percent) * 2),
+      var(--shiny-highlight) calc(var(--shiny-percent) * 3),
+      transparent calc(var(--shiny-percent) * 4)
+    ) border-box;
+  box-shadow: inset 0 0 0 1px var(--shiny-bg-subtle);
+  transition: var(--shiny-transition);
+  transition-property: --shiny-angle-offset, --shiny-percent, --shiny-shine, box-shadow;
+}
+.shiny-cta::before,
+.shiny-cta::after,
+.shiny-cta span::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+}
+.shiny-cta:active {
+  translate: 0 1px;
+}
+/* Pola titik */
+.shiny-cta::before {
+  --shiny-size: calc(100% - var(--shiny-shadow-size) * 3);
+  --shiny-position: 2px;
+  --shiny-space: calc(var(--shiny-position) * 2);
+  width: var(--shiny-size);
+  height: var(--shiny-size);
+  background: radial-gradient(
+    circle at var(--shiny-position) var(--shiny-position),
+    #fff calc(var(--shiny-position) / 4),
+    transparent 0
+  ) padding-box;
+  background-size: var(--shiny-space) var(--shiny-space);
+  background-repeat: space;
+  mask-image: conic-gradient(
+    from calc(var(--shiny-angle) + 45deg),
+    black,
+    transparent 10% 90%,
+    black
+  );
+  border-radius: inherit;
+  opacity: .4;
+  z-index: -1;
+}
+/* Shimmer di dalam */
+.shiny-cta::after {
+  --shiny-animation: shiny-shimmer linear infinite;
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(-50deg, transparent, var(--shiny-highlight), transparent);
+  mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+  opacity: .6;
+}
+.shiny-cta span {
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.shiny-cta span::before {
+  --shiny-size: calc(100% + 1rem);
+  width: var(--shiny-size);
+  height: var(--shiny-size);
+  box-shadow: inset 0 -1ex 2rem 4px var(--shiny-highlight);
+  opacity: 0;
+  transition: opacity var(--shiny-transition);
+  animation: calc(var(--shiny-duration) * 1.5) shiny-breathe linear infinite;
+}
+/* Animasi */
+.shiny-cta,
+.shiny-cta::before,
+.shiny-cta::after {
+  animation: var(--shiny-animation) var(--shiny-duration),
+    var(--shiny-animation) calc(var(--shiny-duration) / .4) reverse paused;
+  animation-composition: add;
+}
+.shiny-cta:is(:hover, :focus-visible) {
+  --shiny-percent: 20%;
+  --shiny-angle-offset: 95deg;
+  --shiny-shine: var(--shiny-highlight-subtle);
+}
+.shiny-cta:is(:hover, :focus-visible),
+.shiny-cta:is(:hover, :focus-visible)::before,
+.shiny-cta:is(:hover, :focus-visible)::after {
+  animation-play-state: running;
+}
+.shiny-cta:is(:hover, :focus-visible) span::before {
+  opacity: 1;
+}
+@keyframes shiny-angle {
+  to { --shiny-angle: 360deg; }
+}
+@keyframes shiny-shimmer {
+  to { rotate: 360deg; }
+}
+@keyframes shiny-breathe {
+  from, to { scale: 1; }
+  50% { scale: 1.2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shiny-cta, .shiny-cta::before, .shiny-cta::after, .shiny-cta span::before { animation: none !important; transition-duration: .01ms !important; }
+}
 /* Sampul ebook transparan: tanpa kartu putih dan tanpa blok emas */
 .cover-frame {
   width: 340px;
@@ -541,7 +699,7 @@
 
 @media (max-width: 700px) {
   .flipbook { display: none; }
-  .pages-scroll { display: flex; gap: 14px; margin: 0 -20px; padding: 6px 20px 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .pages-scroll { display: flex; gap: 14px; margin: 0 -14px; padding: 6px 14px 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .pages-scroll::-webkit-scrollbar { display: none; }
   .pages-scroll img { flex: 0 0 84%; width: 84%; height: auto; scroll-snap-align: center; border-radius: 6px; background: #fff; box-shadow: 0 14px 28px rgba(49, 39, 21, .2); }
   .pages-hint { display: block; margin: 4px 0 0; text-align: center; font-size: .82rem; color: var(--muted); }
