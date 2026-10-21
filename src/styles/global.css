@@ -57,8 +57,8 @@
       border-bottom: 1px solid rgba(222,216,204,.82);
     }
     .nav { height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-    .brand { display: flex; align-items: center; }
-    .brand img { width: 154px; height: 46px; object-fit: contain; object-position: left center; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { width: auto; height: 46px; }
     .nav-links { display: flex; gap: 25px; align-items: center; color: var(--muted); font-size: .86rem; }
     .nav-links a:hover { color: var(--ink); }
     .nav-cta { padding: 10px 17px; border: 1px solid var(--gold); color: var(--gold-deep); border-radius: 999px; font-weight: 700; font-size: .8rem; }

@@ -433,8 +433,8 @@ const canonical = "https://umrohsendiri.biz.id/";
     const orders = [
       { name: 'Umar', city: 'Depok', time: '2026-10-13T13:00:00+07:00' },
       { name: 'Ridwan', city: 'Tangerang', time: '2026-10-11T13:00:00+07:00' },
-      { name: 'Riska', city: 'Jakarta', time: '2026-10-9T13:00:00+07:00' },
-      { name: 'Citra', city: 'Bekasi', time: '2026-10-9T13:00:00+07:00' },
+      { name: 'Riska', city: 'Jakarta', time: '2026-10-09T13:00:00+07:00' },
+      { name: 'Citra', city: 'Bekasi', time: '2026-10-09T13:00:00+07:00' },
     ];
     const PRODUCT = 'Paket Ebook';
 
@@ -447,7 +447,9 @@ const canonical = "https://umrohsendiri.biz.id/";
       try { closed = sessionStorage.getItem('buy-toast-closed') === '1'; } catch (e) {}
 
       const ago = (iso) => {
-        const s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
+        const t = new Date(iso).getTime();
+        if (Number.isNaN(t)) return 'baru saja';
+        const s = Math.max(0, (Date.now() - t) / 1000);
         if (s < 3600) return Math.max(1, Math.round(s / 60)) + ' menit lalu';
         if (s < 86400) return Math.round(s / 3600) + ' jam lalu';
         if (s < 2592000) return Math.round(s / 86400) + ' hari lalu';
