@@ -27,6 +27,7 @@
       font-family: var(--sans);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
     }
