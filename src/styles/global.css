@@ -934,3 +934,13 @@ h3 { letter-spacing: -.01em; }
 .hero--center .hero-stats { margin-left: auto; margin-right: auto; width: 100%; }
 .hero--center .hero-stat { text-align: center; }
 .hero--center .book-stage { width: min(620px, 100%); min-height: 560px; }
+
+/* === Teks hero rata tengah, buku tetap di kanan (class "hero--text-center") === */
+.hero--text-center .hero-copy { text-align: center; display: flex; flex-direction: column; align-items: center; margin-left: auto; margin-right: auto; }
+.hero--emerald.hero--text-center .hero-copy > .hero-ayat { text-align: center; }
+.hero--text-center .eyebrow::after { content: ""; width: 34px; height: 1px; background: currentColor; }
+.hero--text-center .hero-lead { margin-left: auto; margin-right: auto; }
+.hero--text-center .hero-actions { justify-content: center; }
+.hero--text-center .hero-proof { margin-left: auto; margin-right: auto; justify-content: center; }
+.hero--text-center .hero-stats { margin-left: auto; margin-right: auto; width: 100%; }
+.hero--text-center .hero-stat { text-align: center; }
