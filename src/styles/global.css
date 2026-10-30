@@ -729,3 +729,59 @@
 }
 .hero { min-height: 0; padding-top: 24px; }
 .hero-copy h1 { margin-top: 0; }
+/* Tombol WhatsApp hero: bulatan panah meluncur ke kiri saat hover */
+.icon-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  height: 52px;
+  padding: 4px 60px 4px 26px;
+  border-radius: 999px;
+  background: #128C7E;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: .9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 12px 26px rgba(18, 140, 126, .28);
+  transition: padding .5s ease, background-color .3s ease, box-shadow .3s ease;
+}
+.icon-cta__text { position: relative; z-index: 1; }
+.icon-cta__icon {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  color: #128C7E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  transition: right .5s ease, transform .5s ease;
+}
+.icon-cta:is(:hover, :focus-visible) {
+  padding: 4px 26px 4px 60px;
+  background: #0e766a;
+  box-shadow: 0 16px 30px rgba(18, 140, 126, .36);
+}
+.icon-cta:is(:hover, :focus-visible) .icon-cta__icon {
+  right: calc(100% - 46px);
+  transform: translateY(-50%) rotate(45deg);
+}
+.icon-cta:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.icon-cta:active { translate: 0 1px; }
+@media (max-width: 420px) {
+  .icon-cta { font-size: .82rem; padding-left: 20px; }
+  .icon-cta:is(:hover, :focus-visible) { padding-right: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .icon-cta, .icon-cta__icon { transition-duration: .01ms !important; }
+}
