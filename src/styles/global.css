@@ -944,3 +944,9 @@ h3 { letter-spacing: -.01em; }
 .hero--text-center .hero-proof { margin-left: auto; margin-right: auto; justify-content: center; }
 .hero--text-center .hero-stats { margin-left: auto; margin-right: auto; width: 100%; }
 .hero--text-center .hero-stat { text-align: center; }
+/* === Kunci posisi baris teks hero di HP: tiap baris tetap utuh === */
+@media (max-width: 700px) {
+  .hero--emerald .eyebrow { white-space: nowrap; font-size: .68rem; letter-spacing: .12em; gap: 8px; }
+  .hero--emerald .eyebrow::before, .hero--emerald .eyebrow::after { width: 18px; }
+  .hero--emerald .hero-title { white-space: nowrap; font-size: calc((100vw - 48px) / 9.8); }
+}
